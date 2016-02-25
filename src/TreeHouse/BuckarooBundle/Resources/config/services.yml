@@ -1,0 +1,20 @@
+services:
+  tree_house.buckaroo.signature_generator:
+    class: TreeHouse\BuckarooBundle\SignatureGenerator
+    arguments:
+      - '%tree_house.buckaroo.secret_key%'
+
+  tree_house.buckaroo.nvp_guzzle_client:
+    public: false
+    class: GuzzleHttp\Client
+
+  tree_house.buckaroo.nvp_client:
+    class: TreeHouse\BuckarooBundle\Client\NvpClient
+    arguments:
+      - '@tree_house.buckaroo.nvp_guzzle_client'
+      - '@tree_house.buckaroo.signature_generator'
+      - '%tree_house.buckaroo.website_key%'
+      - '%tree_house.buckaroo.test_mode%'
+      - '@logger'
+    tags:
+      - { name: 'monolog.logger', channel: 'buckaroo' }

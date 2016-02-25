@@ -1,0 +1,44 @@
+{
+  "name": "treehouselabs/buckaroo-bundle",
+  "type": "symfony-bundle",
+  "description": "Symfony bundle to integrate Buckaroo",
+  "keywords": [],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Peter Kruithof",
+      "email": "peter@treehouse.nl",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=5.6",
+    "psr/log": "^1.0",
+    "symfony/symfony": "^2.8|^3.0",
+    "mathiasverraes/money": "~3.0@alpha",
+    "guzzlehttp/guzzle": "^6.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.0",
+    "mockery/mockery": "^0.9",
+    "matthiasnoback/symfony-dependency-injection-test": "^0.7.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "TreeHouse\\BuckarooBundle\\": "src/TreeHouse/BuckarooBundle/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "TreeHouse\\BuckarooBundle\\Tests\\": "tests/src/TreeHouse/BuckarooBundle/Tests/"
+    }
+  },
+  "scripts": {
+    "test": "phpunit"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  }
+}
