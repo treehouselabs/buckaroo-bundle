@@ -47,7 +47,9 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 
 ## Credits
 
-- [Peter Kruithof][link-author]
+- [Jan Dorsman][link-oldskool]
+- [Cas Leentfaar][link-cleentfaar]
+- [Peter Kruithof][link-pkruithof]
 - [All Contributors][link-contributors]
 
 
@@ -63,5 +65,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-scrutinizer]:  https://scrutinizer-ci.com/g/treehouselabs/buckaroo-bundle/code-structure
 [link-code-quality]: https://scrutinizer-ci.com/g/treehouselabs/buckaroo-bundle
 [link-downloads]:    https://packagist.org/packages/treehouselabs/buckaroo-bundle
-[link-author]:       https://github.com/pkruithof
+[link-oldskool]:     https://github.com/oldskool
+[link-cleentfaar]:   https://github.com/cleentfaar
+[link-pkruithof]:    https://github.com/pkruithof
 [link-contributors]: ../../contributors

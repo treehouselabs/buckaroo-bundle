@@ -6,6 +6,16 @@
   "license": "MIT",
   "authors": [
     {
+      "name": "Jan Dorsman",
+      "email": "jan@treehouse.nl",
+      "role": "Developer"
+    },
+    {
+      "name": "Cas Leentfaar",
+      "email": "cas@treehouse.nl",
+      "role": "Developer"
+    },
+    {
       "name": "Peter Kruithof",
       "email": "peter@treehouse.nl",
       "role": "Developer"
