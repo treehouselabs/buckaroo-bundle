@@ -1,5 +1,5 @@
-:bundle_name
-============
+BuckarooBundle
+==============
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
@@ -12,7 +12,19 @@ Symfony bundle to integrate Buckaroo functionality.
 
 ## Usage
 
-Describe shortly what the bundle does and how to use it.
+The bundle provides a client that can interact with Buckaroo. See the
+following example for a SEPA direct debit transaction:
+
+```php
+$request = new SimpleSepaDirectDebitTransactionRequest();
+$request->setAmount(Money::EUR(1000));
+$request->setCustomerAccountName($bankAccountHolder);
+$request->setCustomerIban($iban);
+$request->setInvoiceNumber($invoiceNumber);
+$request->setMandate(new Mandate($reference, new \DateTime());
+
+$this->buckaroo->send($request);
+```
 
 
 ## Documentation
