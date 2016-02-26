@@ -92,32 +92,31 @@ class IdealTransactionReport extends AbstractTransactionReport
      */
     public static function create(array $data)
     {
-        $report = parent::create($data);
-
         $requiredFields = [
             'BRQ_AMOUNT',
             'BRQ_CURRENCY',
-            'BRQ_CUSTOMER_NAME',
             'BRQ_DESCRIPTION',
-            'BRQ_PAYER_HASH',
             'BRQ_PAYMENT',
             'BRQ_PAYMENT_METHOD',
-            'BRQ_SERVICE_IDEAL_CONSUMERBIC',
-            'BRQ_SERVICE_IDEAL_CONSUMERIBAN',
             'BRQ_SERVICE_IDEAL_CONSUMERISSUER',
-            'BRQ_SERVICE_IDEAL_CONSUMERNAME',
             'BRQ_TRANSACTIONS',
         ];
 
-        foreach ($requiredFields as $field) {
-            if (!isset($data[$field])) {
-                throw new \InvalidArgumentException(sprintf('Missing field: %s', $field));
-            }
-        }
+        $optionalFields = [
+            'BRQ_CUSTOMER_NAME',
+            'BRQ_PAYER_HASH',
+            'BRQ_SERVICE_IDEAL_CONSUMERBIC',
+            'BRQ_SERVICE_IDEAL_CONSUMERIBAN',
+            'BRQ_SERVICE_IDEAL_CONSUMERNAME',
+        ];
 
+        static::checkRequiredFields($requiredFields, $data);
+        static::ensureOptionalFields($optionalFields, $data);
+
+        $report = parent::create($data);
         $report->amount = new Money(intval($data['BRQ_AMOUNT'] * 100), new Currency($data['BRQ_CURRENCY']));
-        $report->customerName = $data['BRQ_CUSTOMER_NAME'];
         $report->description = $data['BRQ_DESCRIPTION'];
+        $report->customerName = $data['BRQ_CUSTOMER_NAME'];
         $report->payerHash = $data['BRQ_PAYER_HASH'];
         $report->payment = $data['BRQ_PAYMENT'];
         $report->paymentMethod = $data['BRQ_PAYMENT_METHOD'];

@@ -50,12 +50,18 @@ abstract class AbstractTransactionReport implements ReportInterface
      */
     public static function create(array $data)
     {
+        static::ensureOptionalFields(['BRQ_STATUSCODE_DETAIL'], $data);
+        static::checkRequiredFields(
+            ['BRQ_INVOICENUMBER', 'BRQ_STATUSCODE', 'BRQ_STATUSMESSAGE', 'BRQ_TIMESTAMP'],
+            $data
+        );
+
         return new static(
             $data['BRQ_INVOICENUMBER'],
             $data['BRQ_STATUSCODE'],
             $data['BRQ_STATUSMESSAGE'],
             new \DateTime($data['BRQ_TIMESTAMP']),
-            isset($data['BRQ_STATUSCODE_DETAIL']) ? $data['BRQ_STATUSCODE_DETAIL'] : null
+            $data['BRQ_STATUSCODE_DETAIL']
         );
     }
 
@@ -130,5 +136,38 @@ abstract class AbstractTransactionReport implements ReportInterface
     public function getTimestamp()
     {
         return $this->timestamp;
+    }
+
+    /**
+     * Checks that the given fields are in the array and are not `null`.
+     *
+     * @param array $fields
+     * @param array $data
+     *
+     * @throws \InvalidArgumentException
+     */
+    protected static function checkRequiredFields(array $fields, array $data)
+    {
+        foreach ($fields as $field) {
+            if (!isset($data[$field])) {
+                throw new \InvalidArgumentException(sprintf('Missing field: %s', $field));
+            }
+        }
+    }
+
+    /**
+     * Ensures that the given fields exist in the $data array.
+     * If a field does not exist, it will be added with a `null` value.
+     *
+     * @param array $fields
+     * @param array $data
+     */
+    protected static function ensureOptionalFields(array $fields, array &$data)
+    {
+        foreach ($fields as $field) {
+            if (!isset($data[$field])) {
+                $data[$field] = null;
+            }
+        }
     }
 }
