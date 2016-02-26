@@ -14,17 +14,6 @@ class SimpleSepaDirectDebitTransactionDebitReport extends AbstractSimpleSepaDire
      */
     public static function create(array $data)
     {
-        $report = parent::create($data);
-
-        if ('C008' !== $data['BRQ_TRANSACTION_TYPE']) {
-            throw new \RuntimeException(
-                'Expected to create a %s for a debit transaction. Got a credit transaction (type %s) instead. ' .
-                'Are you attempting to create a SimpleSepaDirectDebitTransactionDebitReport?',
-                get_class(),
-                $report->getTransactionType()
-            );
-        }
-
         $requiredFields = [
             'BRQ_AMOUNT',
             'BRQ_CURRENCY',
@@ -39,15 +28,22 @@ class SimpleSepaDirectDebitTransactionDebitReport extends AbstractSimpleSepaDire
             'BRQ_STARTRECURRENT',
             'BRQ_TRANSACTION_METHOD',
             'BRQ_TRANSACTION_TYPE',
-            'BRQ_TRANSACTIONS',
         ];
 
-        foreach ($requiredFields as $field) {
-            if (!isset($data[$field])) {
-                throw new \InvalidArgumentException(sprintf('Missing field: %s', $field));
-            }
+        static::checkRequiredFields($requiredFields, $data);
+
+        if ('C008' !== $data['BRQ_TRANSACTION_TYPE']) {
+            throw new \RuntimeException(
+                sprintf(
+                    'Expected to create a %s for a debit transaction. Got a credit transaction (type %s) instead. ' .
+                    'Are you attempting to create a SimpleSepaDirectDebitTransactionDebitReport?',
+                    static::class,
+                    $data['BRQ_TRANSACTION_TYPE']
+                )
+            );
         }
 
+        $report = parent::create($data);
         $report->amount = new Money(intval($data['BRQ_AMOUNT'] * 100), new Currency($data['BRQ_CURRENCY']));
         $report->customerName = $data['BRQ_CUSTOMER_NAME'];
         $report->invoiceNumber = $data['BRQ_INVOICENUMBER'];
@@ -60,7 +56,6 @@ class SimpleSepaDirectDebitTransactionDebitReport extends AbstractSimpleSepaDire
         $report->startRecurrent = (bool) $data['BRQ_STARTRECURRENT'];
         $report->transactionMethod = $data['BRQ_TRANSACTION_METHOD'];
         $report->transactionType = $data['BRQ_TRANSACTION_TYPE'];
-        $report->transactions = $data['BRQ_TRANSACTIONS'];
 
         return $report;
     }

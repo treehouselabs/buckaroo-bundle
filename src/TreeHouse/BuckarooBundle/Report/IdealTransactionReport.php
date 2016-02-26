@@ -78,43 +78,33 @@ class IdealTransactionReport extends AbstractTransactionReport
     private $consumerIssuer;
 
     /**
-     * One or more transaction keys. One key if only a transaction was created or a payment with one underlying transaction.
-     * Multiple keys if one payment has multiple underlying transactions. List of keys is comma separated.
-     *
-     * @var string
-     */
-    private $transactions;
-
-    /**
      * @inheritdoc
      *
      * @return $this
      */
     public static function create(array $data)
     {
-        $report = parent::create($data);
-
         $requiredFields = [
             'BRQ_AMOUNT',
             'BRQ_CURRENCY',
-            'BRQ_CUSTOMER_NAME',
             'BRQ_DESCRIPTION',
-            'BRQ_PAYER_HASH',
             'BRQ_PAYMENT',
             'BRQ_PAYMENT_METHOD',
-            'BRQ_SERVICE_IDEAL_CONSUMERBIC',
-            'BRQ_SERVICE_IDEAL_CONSUMERIBAN',
             'BRQ_SERVICE_IDEAL_CONSUMERISSUER',
-            'BRQ_SERVICE_IDEAL_CONSUMERNAME',
-            'BRQ_TRANSACTIONS',
         ];
 
-        foreach ($requiredFields as $field) {
-            if (!isset($data[$field])) {
-                throw new \InvalidArgumentException(sprintf('Missing field: %s', $field));
-            }
-        }
+        $optionalFields = [
+            'BRQ_CUSTOMER_NAME',
+            'BRQ_PAYER_HASH',
+            'BRQ_SERVICE_IDEAL_CONSUMERBIC',
+            'BRQ_SERVICE_IDEAL_CONSUMERIBAN',
+            'BRQ_SERVICE_IDEAL_CONSUMERNAME',
+        ];
 
+        static::checkRequiredFields($requiredFields, $data);
+        static::ensureOptionalFields($optionalFields, $data);
+
+        $report = parent::create($data);
         $report->amount = new Money(intval($data['BRQ_AMOUNT'] * 100), new Currency($data['BRQ_CURRENCY']));
         $report->customerName = $data['BRQ_CUSTOMER_NAME'];
         $report->description = $data['BRQ_DESCRIPTION'];
@@ -125,7 +115,6 @@ class IdealTransactionReport extends AbstractTransactionReport
         $report->consumerIban = $data['BRQ_SERVICE_IDEAL_CONSUMERIBAN'];
         $report->consumerIssuer = $data['BRQ_SERVICE_IDEAL_CONSUMERISSUER'];
         $report->consumerName = $data['BRQ_SERVICE_IDEAL_CONSUMERNAME'];
-        $report->transactions = $data['BRQ_TRANSACTIONS'];
 
         return $report;
     }
@@ -208,13 +197,5 @@ class IdealTransactionReport extends AbstractTransactionReport
     public function getConsumerIssuer()
     {
         return $this->consumerIssuer;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTransactions()
-    {
-        return $this->transactions;
     }
 }
