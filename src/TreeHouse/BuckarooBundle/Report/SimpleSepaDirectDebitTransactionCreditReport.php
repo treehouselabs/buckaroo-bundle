@@ -28,16 +28,17 @@ class SimpleSepaDirectDebitTransactionCreditReport extends AbstractSimpleSepaDir
             'BRQ_PAYMENT',
             'BRQ_TRANSACTION_METHOD',
             'BRQ_TRANSACTION_TYPE',
-            'BRQ_TRANSACTIONS',
         ];
 
         static::checkRequiredFields($requiredFields, $data);
 
         if ('C008' === $data['BRQ_TRANSACTION_TYPE']) {
             throw new \RuntimeException(
-                'Expected to create a %s for a credit transaction. Got a regular transaction (type C008) instead. ' .
-                'Are you attempting to create a SimpleSepaDirectDebitTransactionDebitReport?',
-                get_class()
+                sprintf(
+                    'Expected to create a %s for a credit transaction. Got a regular transaction (type C008) instead. ' .
+                    'Are you attempting to create a SimpleSepaDirectDebitTransactionDebitReport?',
+                    static::class
+                )
             );
         }
 

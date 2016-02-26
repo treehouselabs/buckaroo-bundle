@@ -28,17 +28,18 @@ class SimpleSepaDirectDebitTransactionDebitReport extends AbstractSimpleSepaDire
             'BRQ_STARTRECURRENT',
             'BRQ_TRANSACTION_METHOD',
             'BRQ_TRANSACTION_TYPE',
-            'BRQ_TRANSACTIONS',
         ];
 
         static::checkRequiredFields($requiredFields, $data);
 
         if ('C008' !== $data['BRQ_TRANSACTION_TYPE']) {
             throw new \RuntimeException(
-                'Expected to create a %s for a debit transaction. Got a credit transaction (type %s) instead. ' .
-                'Are you attempting to create a SimpleSepaDirectDebitTransactionDebitReport?',
-                get_class(),
-                $data['BRQ_TRANSACTION_TYPE']
+                sprintf(
+                    'Expected to create a %s for a debit transaction. Got a credit transaction (type %s) instead. ' .
+                    'Are you attempting to create a SimpleSepaDirectDebitTransactionDebitReport?',
+                    static::class,
+                    $data['BRQ_TRANSACTION_TYPE']
+                )
             );
         }
 
@@ -55,7 +56,6 @@ class SimpleSepaDirectDebitTransactionDebitReport extends AbstractSimpleSepaDire
         $report->startRecurrent = (bool) $data['BRQ_STARTRECURRENT'];
         $report->transactionMethod = $data['BRQ_TRANSACTION_METHOD'];
         $report->transactionType = $data['BRQ_TRANSACTION_TYPE'];
-        $report->transactions = $data['BRQ_TRANSACTIONS'];
 
         return $report;
     }

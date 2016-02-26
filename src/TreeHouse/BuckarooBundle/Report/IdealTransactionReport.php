@@ -78,14 +78,6 @@ class IdealTransactionReport extends AbstractTransactionReport
     private $consumerIssuer;
 
     /**
-     * One or more transaction keys. One key if only a transaction was created or a payment with one underlying transaction.
-     * Multiple keys if one payment has multiple underlying transactions. List of keys is comma separated.
-     *
-     * @var string
-     */
-    private $transactions;
-
-    /**
      * @inheritdoc
      *
      * @return $this
@@ -99,7 +91,6 @@ class IdealTransactionReport extends AbstractTransactionReport
             'BRQ_PAYMENT',
             'BRQ_PAYMENT_METHOD',
             'BRQ_SERVICE_IDEAL_CONSUMERISSUER',
-            'BRQ_TRANSACTIONS',
         ];
 
         $optionalFields = [
@@ -115,8 +106,8 @@ class IdealTransactionReport extends AbstractTransactionReport
 
         $report = parent::create($data);
         $report->amount = new Money(intval($data['BRQ_AMOUNT'] * 100), new Currency($data['BRQ_CURRENCY']));
-        $report->description = $data['BRQ_DESCRIPTION'];
         $report->customerName = $data['BRQ_CUSTOMER_NAME'];
+        $report->description = $data['BRQ_DESCRIPTION'];
         $report->payerHash = $data['BRQ_PAYER_HASH'];
         $report->payment = $data['BRQ_PAYMENT'];
         $report->paymentMethod = $data['BRQ_PAYMENT_METHOD'];
@@ -124,7 +115,6 @@ class IdealTransactionReport extends AbstractTransactionReport
         $report->consumerIban = $data['BRQ_SERVICE_IDEAL_CONSUMERIBAN'];
         $report->consumerIssuer = $data['BRQ_SERVICE_IDEAL_CONSUMERISSUER'];
         $report->consumerName = $data['BRQ_SERVICE_IDEAL_CONSUMERNAME'];
-        $report->transactions = $data['BRQ_TRANSACTIONS'];
 
         return $report;
     }
@@ -207,13 +197,5 @@ class IdealTransactionReport extends AbstractTransactionReport
     public function getConsumerIssuer()
     {
         return $this->consumerIssuer;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTransactions()
-    {
-        return $this->transactions;
     }
 }

@@ -241,4 +241,23 @@ class IdealTransactionReportTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($this->timestamp, $report->getTimestamp()->format('Y-m-d H:i:s'));
         $this->assertSame($this->transactions, $report->getTransactions());
     }
+
+    /**
+     * @test
+     * @expectedException \InvalidArgumentException
+     */
+    public function it_fails_when_data_is_missing()
+    {
+        $data = [
+            'BRQ_AMOUNT' => $this->amount,
+            'BRQ_CURRENCY' => $this->currency,
+            'BRQ_DESCRIPTION' => $this->description,
+            'BRQ_INVOICENUMBER' => $this->invoiceNumber,
+            'BRQ_PAYMENT' => $this->payment,
+            'BRQ_PAYMENT_METHOD' => $this->paymentMethod,
+            'BRQ_SERVICE_IDEAL_CONSUMERISSUER' => $this->consumerIssuer,
+        ];
+
+        IdealTransactionReport::create($data);
+    }
 }
