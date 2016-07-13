@@ -22,6 +22,7 @@ class SimpleSepaDirectDebitTransactionRequestTest extends \PHPUnit_Framework_Tes
         $request->setCustomerAccountName($bankAccountHolder = 'P. Puk');
         $request->setDatetimeCollect($datetimeCollect = new \DateTime());
         $request->setMandate(new Mandate($mandateReference = 1234567890, $datetimeMandate = new \DateTime()));
+        $request->setDescription($description = 'Foobar');
 
         $data = $request->toArray();
 
@@ -35,5 +36,6 @@ class SimpleSepaDirectDebitTransactionRequestTest extends \PHPUnit_Framework_Tes
         $this->assertSame($mandateReference, $data['service_simplesepadirectdebit_MandateReference']);
         $this->assertSame($bankAccountHolder, $data['customeraccountname']);
         $this->assertSame(true, $data['StartRecurrent']);
+        $this->assertSame($description, $data['description']);
     }
 }

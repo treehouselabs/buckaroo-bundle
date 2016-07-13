@@ -124,7 +124,6 @@ class SimpleSepaDirectDebitTransactionResponse extends AbstractTransactionRespon
             'BRQ_PAYMENT',
             'BRQ_PAYMENT_METHOD',
             'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_COLLECTDATE',
-            'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_CUSTOMERBIC',
             'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_CUSTOMERIBAN',
             'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_DIRECTDEBITTYPE',
             'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_MANDATEDATE',
@@ -154,7 +153,7 @@ class SimpleSepaDirectDebitTransactionResponse extends AbstractTransactionRespon
         $response->transactions = $data['BRQ_TRANSACTIONS'];
         $response->datetimeCollect = new \DateTime($data['BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_COLLECTDATE']);
         $response->customerName = $data['BRQ_CUSTOMER_NAME'];
-        $response->customerBic = $data['BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_CUSTOMERBIC'];
+        $response->customerBic = isset($data['BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_CUSTOMERBIC']) ? $data['BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_CUSTOMERBIC'] : null;
         $response->customerIban = $data['BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_CUSTOMERIBAN'];
         $response->directDebitType = $data['BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_DIRECTDEBITTYPE'];
 
