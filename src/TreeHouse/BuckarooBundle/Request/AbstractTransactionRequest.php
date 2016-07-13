@@ -21,6 +21,13 @@ abstract class AbstractTransactionRequest implements RequestInterface
     private $invoiceNumber;
 
     /**
+     * Description displayed with the transaction (visible to customer)
+     *
+     * @var string|null
+     */
+    private $description;
+
+    /**
      * @param Money $amount
      */
     public function setAmount(Money $amount)
@@ -37,6 +44,14 @@ abstract class AbstractTransactionRequest implements RequestInterface
     }
 
     /**
+     * @param string|null $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
      * @inheritdoc
      */
     public function toArray()
@@ -45,6 +60,7 @@ abstract class AbstractTransactionRequest implements RequestInterface
             'amount' => number_format($this->amount->getAmount() / 100, 2, '.', ''),
             'currency' => $this->amount->getCurrency()->getCode(),
             'invoicenumber' => $this->invoiceNumber,
+            'description' => (string) $this->description,
         ];
     }
 
