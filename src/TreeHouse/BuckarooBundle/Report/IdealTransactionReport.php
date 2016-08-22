@@ -89,13 +89,13 @@ class IdealTransactionReport extends AbstractTransactionReport
             'BRQ_CURRENCY',
             'BRQ_DESCRIPTION',
             'BRQ_PAYMENT',
-            'BRQ_PAYMENT_METHOD',
             'BRQ_SERVICE_IDEAL_CONSUMERISSUER',
         ];
 
         $optionalFields = [
             'BRQ_CUSTOMER_NAME',
             'BRQ_PAYER_HASH',
+            'BRQ_PAYMENT_METHOD',
             'BRQ_SERVICE_IDEAL_CONSUMERBIC',
             'BRQ_SERVICE_IDEAL_CONSUMERIBAN',
             'BRQ_SERVICE_IDEAL_CONSUMERNAME',
