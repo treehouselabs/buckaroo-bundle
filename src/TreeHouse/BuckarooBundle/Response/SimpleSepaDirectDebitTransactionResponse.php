@@ -192,6 +192,14 @@ class SimpleSepaDirectDebitTransactionResponse extends AbstractTransactionRespon
     /**
      * @return string
      */
+    public function getCustomerBic(): string
+    {
+        return $this->customerBic;
+    }
+
+    /**
+     * @return string
+     */
     public function getCustomerName()
     {
         return $this->customerName;
