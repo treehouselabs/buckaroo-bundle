@@ -140,8 +140,6 @@ abstract class AbstractClient implements ClientInterface
      */
     private function normalizeIncomingData(array $data, $checkSignature = true)
     {
-        $data = array_map('urldecode', $data);
-
         if (!isset($data['BRQ_SIGNATURE'])) {
             throw new \InvalidArgumentException('Result data does not contain a signature');
         }
