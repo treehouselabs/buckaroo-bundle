@@ -32,6 +32,23 @@ class NvpClientTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function it_does_not_decode_response_data()
+    {
+        $request = $this->getRequestMock([]);
+        $request->shouldReceive('getResponseClass')->once()->andReturn(MockResponse::class);
+
+        $client = $this->createNvpClient(['foobar' => $encodedValue = 'foo%20bar@example.com']);
+
+        /* @var MockResponse $response */
+        $response = $client->send($request);
+
+        $this->assertInstanceOf(ResponseInterface::class, $response);
+        $this->assertSame($encodedValue, $response->getFoobar());
+    }
+
+    /**
+     * @test
+     */
     public function it_can_get_the_gateway_url()
     {
         $client = $this->createNvpClient();
@@ -62,16 +79,17 @@ class NvpClientTest extends \PHPUnit_Framework_TestCase
         $request = $this->getRequestMock($data);
         $request->shouldNotReceive('getResponseClass');
 
-        $client = $this->createNvpClient(500);
+        $client = $this->createNvpClient([], 500);
         $client->send($request);
     }
 
     /**
-     * @param int $responseStatusCode
+     * @param array $data
+     * @param int   $responseStatusCode
      *
      * @return NvpClient
      */
-    private function createNvpClient($responseStatusCode = 200)
+    private function createNvpClient(array $data = [], $responseStatusCode = 200)
     {
         $websiteKey = 'website-key';
 
@@ -79,7 +97,9 @@ class NvpClientTest extends \PHPUnit_Framework_TestCase
         $generator = Mock::mock(SignatureGenerator::class);
         $generator->shouldReceive('generate')->andReturn('1234');
 
-        $guzzle = new Client(['handler' => new MockHandler([new Response($responseStatusCode, [], 'BRQ_SIGNATURE=1234')])]);
+        $query = http_build_query(array_merge(['BRQ_SIGNATURE' => '1234'], $data));
+
+        $guzzle = new Client(['handler' => new MockHandler([new Response($responseStatusCode, [], $query)])]);
         $client = new NvpClient($guzzle, $generator, $websiteKey, true);
 
         return $client;
@@ -109,5 +129,32 @@ class NvpClientTest extends \PHPUnit_Framework_TestCase
         $request->shouldReceive('getOperation')->andReturn($operation);
 
         return $request;
+    }
+}
+
+class MockResponse implements ResponseInterface
+{
+    /**
+     * @var mixed
+     */
+    private $foobar;
+
+    /**
+     * @inheritdoc
+     */
+    public static function create(array $data)
+    {
+        $response = new static();
+        $response->foobar = $data['foobar'];
+
+        return $response;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFoobar()
+    {
+        return $this->foobar;
     }
 }
