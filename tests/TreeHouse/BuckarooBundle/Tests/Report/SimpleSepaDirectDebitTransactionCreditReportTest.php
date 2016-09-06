@@ -17,6 +17,8 @@ class SimpleSepaDirectDebitTransactionCreditReportTest extends \PHPUnit_Framewor
     private $transactions = 'ADE9AB5949924D9482E10AD1920A324D';
     private $transactionType = 'C005';
     private $transactionMethod = 'SimpleSepaDirectDebit';
+    private $reasonCode = 'MD06';
+    private $reasonExplanation = 'Debtor+uses+8+weeks+reversal+right';
 
     /**
      * @test
@@ -38,6 +40,8 @@ class SimpleSepaDirectDebitTransactionCreditReportTest extends \PHPUnit_Framewor
             'BRQ_STATUSMESSAGE' => $statusMessage,
             'BRQ_TIMESTAMP' => $this->timestamp,
             'BRQ_TRANSACTIONS' => $this->transactions,
+            'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_REASONCODE' => $this->reasonCode,
+            'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_REASONEXPLANATION' => $this->reasonExplanation,
         ];
 
         $report = SimpleSepaDirectDebitTransactionCreditReport::create($data);
@@ -54,6 +58,8 @@ class SimpleSepaDirectDebitTransactionCreditReportTest extends \PHPUnit_Framewor
         $this->assertSame($statusMessage, $report->getStatusMessage());
         $this->assertSame($this->timestamp, $report->getTimestamp()->format('Y-m-d H:i:s'));
         $this->assertSame($this->transactions, $report->getTransactions());
+        $this->assertSame($this->reasonCode, $report->getReasonCode());
+        $this->assertSame($this->reasonExplanation, $report->getReasonExplanation());
     }
 
     /**

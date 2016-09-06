@@ -12,6 +12,16 @@ use Money\Money;
 class SimpleSepaDirectDebitTransactionCreditReport extends AbstractSimpleSepaDirectDebitTransactionReport
 {
     /**
+     * @var string|null
+     */
+    private $reasonCode;
+
+    /**
+     * @var string|null
+     */
+    private $reasonExplanation;
+
+    /**
      * Creates a credited transaction (reversed/rejected/bounced) report.
      *
      * @param array $data
@@ -30,7 +40,13 @@ class SimpleSepaDirectDebitTransactionCreditReport extends AbstractSimpleSepaDir
             'BRQ_TRANSACTION_TYPE',
         ];
 
+        $optionalFields = [
+            'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_REASONCODE',
+            'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_REASONEXPLANATION',
+        ];
+
         static::checkRequiredFields($requiredFields, $data);
+        static::ensureOptionalFields($optionalFields, $data);
 
         if ('C008' === $data['BRQ_TRANSACTION_TYPE']) {
             throw new \RuntimeException(
@@ -42,6 +58,7 @@ class SimpleSepaDirectDebitTransactionCreditReport extends AbstractSimpleSepaDir
             );
         }
 
+        /** @var static $report */
         $report = parent::create($data);
         $report->amount = new Money(intval($data['BRQ_AMOUNT_CREDIT'] * 100), new Currency($data['BRQ_CURRENCY']));
         $report->customerName = $data['BRQ_CUSTOMER_NAME'];
@@ -50,7 +67,25 @@ class SimpleSepaDirectDebitTransactionCreditReport extends AbstractSimpleSepaDir
         $report->transactionMethod = $data['BRQ_TRANSACTION_METHOD'];
         $report->transactionType = $data['BRQ_TRANSACTION_TYPE'];
         $report->transactions = $data['BRQ_TRANSACTIONS'];
+        $report->reasonCode = $data['BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_REASONCODE'];
+        $report->reasonExplanation = $data['BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_REASONEXPLANATION'];
 
         return $report;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getReasonCode()
+    {
+        return $this->reasonCode;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getReasonExplanation()
+    {
+        return $this->reasonExplanation;
     }
 }
