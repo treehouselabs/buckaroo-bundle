@@ -104,6 +104,7 @@ class IdealTransactionReport extends AbstractTransactionReport
         static::checkRequiredFields($requiredFields, $data);
         static::ensureOptionalFields($optionalFields, $data);
 
+        /** @var static $report */
         $report = parent::create($data);
         $report->amount = new Money(intval($data['BRQ_AMOUNT'] * 100), new Currency($data['BRQ_CURRENCY']));
         $report->customerName = $data['BRQ_CUSTOMER_NAME'];
