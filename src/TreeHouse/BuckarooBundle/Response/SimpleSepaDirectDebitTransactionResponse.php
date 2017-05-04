@@ -107,7 +107,8 @@ class SimpleSepaDirectDebitTransactionResponse extends AbstractTransactionRespon
 
         if ($response->isInvalid()) {
             throw new \RuntimeException(sprintf(
-                'The transaction resulted in a %d response. The transaction cannot be completed: %s',
+                'The transaction with invoice number %s resulted in a %d response. The transaction cannot be completed: %s',
+                $response->getInvoiceNumber(),
                 $response->getStatusCode(),
                 $response->getError()
             ));
