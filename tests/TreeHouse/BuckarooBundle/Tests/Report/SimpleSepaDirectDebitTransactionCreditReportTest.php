@@ -34,7 +34,6 @@ class SimpleSepaDirectDebitTransactionCreditReportTest extends \PHPUnit_Framewor
             'BRQ_CUSTOMER_NAME' => $this->customerName,
             'BRQ_INVOICENUMBER' => $this->invoiceNumber,
             'BRQ_PAYMENT' => $this->payment,
-            'BRQ_TRANSACTION_METHOD' => $this->transactionMethod,
             'BRQ_TRANSACTION_TYPE' => $this->transactionType,
             'BRQ_STATUSCODE' => $statuscode,
             'BRQ_STATUSMESSAGE' => $statusMessage,
