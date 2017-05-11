@@ -6,8 +6,6 @@ use Money\Money;
 
 abstract class AbstractSimpleSepaDirectDebitTransactionReport extends AbstractTransactionReport
 {
-    public const DEFAULT_TRANSACTION_METHOD = 'SimpleSepaDirectDebit';
-
     /**
      * The amount for the transaction.
      *

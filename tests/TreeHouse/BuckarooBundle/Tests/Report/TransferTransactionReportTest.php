@@ -18,7 +18,6 @@ class TransferTransactionReportTest extends \PHPUnit_Framework_TestCase
     private $test = false;
     private $timestamp = '2015-01-01 12:34:56';
     private $transactions = 'ADE9AB5949924D9482E10AD1920A324D';
-    private $transactionMethod = 'transfer';
     private $transactionType = 'C001';
     private $signature = '5TzIZWifLXr2gtXlYoc93dewnnY3noZWakZhtiO8';
     private $websitekey = '123456789';
@@ -44,7 +43,7 @@ class TransferTransactionReportTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($this->statusCodeDetail, $report->getStatusCodeDetail());
         $this->assertSame($this->statusMessage, $report->getStatusMessage());
         $this->assertSame($this->timestamp, $report->getTimestamp()->format('Y-m-d H:i:s'));
-        $this->assertSame($this->transactionMethod, $report->getTransactionMethod());
+        $this->assertNull($report->getTransactionMethod());
         $this->assertSame($this->transactionType, $report->getTransactionType());
         $this->assertSame($this->transactions, $report->getTransactions());
     }
@@ -84,7 +83,6 @@ class TransferTransactionReportTest extends \PHPUnit_Framework_TestCase
             'BRQ_STATUSMESSAGE' => $this->statusMessage,
             'BRQ_TEST' => $this->test,
             'BRQ_TIMESTAMP' => $this->timestamp,
-            'BRQ_TRANSACTION_METHOD' => $this->transactionMethod,
             'BRQ_TRANSACTION_TYPE' => $this->transactionType,
             'BRQ_TRANSACTIONS' => $this->transactions,
             'BRQ_WEBSITEKEY' => $this->websitekey,

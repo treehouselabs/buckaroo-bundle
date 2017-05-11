@@ -54,7 +54,7 @@ class SimpleSepaDirectDebitTransactionDebitReport extends AbstractSimpleSepaDire
         $report->mandateDate = new \DateTime($data['BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_MANDATEDATE']);
         $report->mandateReference = $data['BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_MANDATEREFERENCE'];
         $report->startRecurrent = (bool) $data['BRQ_STARTRECURRENT'];
-        $report->transactionMethod = isset($data['BRQ_TRANSACTION_METHOD']) ? $data['BRQ_TRANSACTION_METHOD'] : AbstractSimpleSepaDirectDebitTransactionReport::DEFAULT_TRANSACTION_METHOD;
+        $report->transactionMethod = isset($data['BRQ_TRANSACTION_METHOD']) ? $data['BRQ_TRANSACTION_METHOD'] : null;
         $report->transactionType = $data['BRQ_TRANSACTION_TYPE'];
 
         return $report;

@@ -65,7 +65,7 @@ class TransferTransactionReport extends AbstractTransactionReport
         $report->amount = new Money(intval($data['BRQ_AMOUNT'] * 100), new Currency($data['BRQ_CURRENCY']));
         $report->description = $data['BRQ_DESCRIPTION'];
         $report->payment = $data['BRQ_PAYMENT'];
-        $report->transactionMethod = $data['BRQ_TRANSACTION_METHOD'] ?: AbstractSimpleSepaDirectDebitTransactionReport::DEFAULT_TRANSACTION_METHOD;
+        $report->transactionMethod = isset($data['BRQ_TRANSACTION_METHOD']) ? $data['BRQ_TRANSACTION_METHOD'] : null;
         $report->transactionType = $data['BRQ_TRANSACTION_TYPE'];
 
         return $report;
