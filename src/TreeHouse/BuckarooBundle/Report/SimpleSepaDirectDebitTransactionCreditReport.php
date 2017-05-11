@@ -36,7 +36,6 @@ class SimpleSepaDirectDebitTransactionCreditReport extends AbstractSimpleSepaDir
             'BRQ_CUSTOMER_NAME',
             'BRQ_INVOICENUMBER',
             'BRQ_PAYMENT',
-            'BRQ_TRANSACTION_METHOD',
             'BRQ_TRANSACTION_TYPE',
         ];
 
@@ -64,7 +63,7 @@ class SimpleSepaDirectDebitTransactionCreditReport extends AbstractSimpleSepaDir
         $report->customerName = $data['BRQ_CUSTOMER_NAME'];
         $report->invoiceNumber = $data['BRQ_INVOICENUMBER'];
         $report->payment = $data['BRQ_PAYMENT'];
-        $report->transactionMethod = $data['BRQ_TRANSACTION_METHOD'];
+        $report->transactionMethod = isset($data['BRQ_TRANSACTION_METHOD']) ? $data['BRQ_TRANSACTION_METHOD'] : null;
         $report->transactionType = $data['BRQ_TRANSACTION_TYPE'];
         $report->transactions = $data['BRQ_TRANSACTIONS'];
         $report->reasonCode = $data['BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_REASONCODE'];

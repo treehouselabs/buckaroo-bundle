@@ -47,7 +47,6 @@ class SimpleSepaDirectDebitTransactionDebitReportTest extends \PHPUnit_Framework
             'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_MANDATEDATE' => $this->mandateDate,
             'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_MANDATEREFERENCE' => $this->mandateReference,
             'BRQ_STARTRECURRENT' => $this->startRecurrent,
-            'BRQ_TRANSACTION_METHOD' => $this->transactionMethod,
             'BRQ_TRANSACTION_TYPE' => $this->transactionType,
             'BRQ_TRANSACTIONS' => $this->transactions,
         ];
@@ -95,7 +94,6 @@ class SimpleSepaDirectDebitTransactionDebitReportTest extends \PHPUnit_Framework
             'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_MANDATEDATE' => $this->mandateDate,
             'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_MANDATEREFERENCE' => $this->mandateReference,
             'BRQ_STARTRECURRENT' => $this->startRecurrent,
-            'BRQ_TRANSACTION_METHOD' => $this->transactionMethod,
             'BRQ_TRANSACTION_TYPE' => 'C005',
             'BRQ_TRANSACTIONS' => $this->transactions,
         ];

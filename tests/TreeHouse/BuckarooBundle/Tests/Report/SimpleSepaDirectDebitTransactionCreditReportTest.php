@@ -34,7 +34,6 @@ class SimpleSepaDirectDebitTransactionCreditReportTest extends \PHPUnit_Framewor
             'BRQ_CUSTOMER_NAME' => $this->customerName,
             'BRQ_INVOICENUMBER' => $this->invoiceNumber,
             'BRQ_PAYMENT' => $this->payment,
-            'BRQ_TRANSACTION_METHOD' => $this->transactionMethod,
             'BRQ_TRANSACTION_TYPE' => $this->transactionType,
             'BRQ_STATUSCODE' => $statuscode,
             'BRQ_STATUSMESSAGE' => $statusMessage,
@@ -52,7 +51,7 @@ class SimpleSepaDirectDebitTransactionCreditReportTest extends \PHPUnit_Framewor
         $this->assertSame($this->customerName, $report->getCustomerName());
         $this->assertSame($this->invoiceNumber, $report->getInvoiceNumber());
         $this->assertSame($this->payment, $report->getPayment());
-        $this->assertSame($this->transactionMethod, $report->getTransactionMethod());
+        $this->assertNull($report->getTransactionMethod());
         $this->assertSame($this->transactionType, $report->getTransactionType());
         $this->assertSame($statuscode, $report->getStatusCode());
         $this->assertSame($statusMessage, $report->getStatusMessage());
@@ -77,7 +76,6 @@ class SimpleSepaDirectDebitTransactionCreditReportTest extends \PHPUnit_Framewor
             'BRQ_CUSTOMER_NAME' => $this->customerName,
             'BRQ_INVOICENUMBER' => $this->invoiceNumber,
             'BRQ_PAYMENT' => $this->payment,
-            'BRQ_TRANSACTION_METHOD' => $this->transactionMethod,
             'BRQ_TRANSACTION_TYPE' => 'C008',
             'BRQ_STATUSCODE' => $statuscode,
             'BRQ_STATUSMESSAGE' => $statusMessage,
