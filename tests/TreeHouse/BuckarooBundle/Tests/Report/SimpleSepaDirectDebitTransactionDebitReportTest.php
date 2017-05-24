@@ -22,7 +22,6 @@ class SimpleSepaDirectDebitTransactionDebitReportTest extends \PHPUnit_Framework
     private $startRecurrent = true;
     private $directDebitType = 'Recurring';
     private $transactionType = 'C008';
-    private $transactionMethod = 'SimpleSepaDirectDebit';
 
     /**
      * @test

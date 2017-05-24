@@ -20,16 +20,18 @@ class SimpleSepaDirectDebitTransactionDebitReport extends AbstractSimpleSepaDire
             'BRQ_CUSTOMER_NAME',
             'BRQ_INVOICENUMBER',
             'BRQ_PAYMENT',
-            'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_COLLECTDATE',
-            'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_CUSTOMERIBAN',
-            'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_DIRECTDEBITTYPE',
-            'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_MANDATEDATE',
-            'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_MANDATEREFERENCE',
             'BRQ_STARTRECURRENT',
             'BRQ_TRANSACTION_TYPE',
         ];
 
         static::checkRequiredFields($requiredFields, $data);
+        static::ensureOptionalFields([
+            'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_COLLECTDATE',
+            'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_CUSTOMERIBAN',
+            'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_DIRECTDEBITTYPE',
+            'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_MANDATEDATE',
+            'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_MANDATEREFERENCE',
+        ], $data);
 
         if ('C008' !== $data['BRQ_TRANSACTION_TYPE']) {
             throw new \RuntimeException(
