@@ -26,9 +26,9 @@
     "guzzlehttp/guzzle": "^6.0",
     "moneyphp/money": "^3.0",
     "psr/log": "^1.0",
-    "symfony/config": "4.0",
-    "symfony/dependency-injection": "4.0",
-    "symfony/http-kernel": "4.0"
+    "symfony/config": "^4.0",
+    "symfony/dependency-injection": "^4.1.12",
+    "symfony/http-kernel": "^4.0"
   },
   "require-dev": {
     "matthiasnoback/symfony-dependency-injection-test": "^2.0.0",
