@@ -17,22 +17,6 @@ class NvpClientTest extends TestCase
     /**
      * @test
      */
-    public function it_can_send_a_nvp_request()
-    {
-        $data = ['fruit' => 'apple'];
-
-        $response = $this->getResponseMock();
-
-        $request = $this->getRequestMock($data);
-        $request->shouldReceive('getResponseClass')->once()->andReturn(get_class($response));
-
-        $client = $this->createNvpClient();
-        $this->assertInstanceOf(ResponseInterface::class, $client->send($request));
-    }
-
-    /**
-     * @test
-     */
     public function it_does_not_decode_response_data()
     {
         $request = $this->getRequestMock([]);
@@ -45,6 +29,22 @@ class NvpClientTest extends TestCase
 
         $this->assertInstanceOf(ResponseInterface::class, $response);
         $this->assertSame($encodedValue, $response->getFoobar());
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_send_a_nvp_request()
+    {
+        $data = ['fruit' => 'apple'];
+
+        $response = $this->getResponseMock();
+
+        $request = $this->getRequestMock($data);
+        $request->shouldReceive('getResponseClass')->once()->andReturn($response);
+
+        $client = $this->createNvpClient();
+        $this->assertInstanceOf(ResponseInterface::class, $client->send($request));
     }
 
     /**
