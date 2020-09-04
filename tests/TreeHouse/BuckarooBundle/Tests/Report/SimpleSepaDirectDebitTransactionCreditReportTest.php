@@ -2,11 +2,12 @@
 
 namespace TreeHouse\BuckarooBundle\Tests\Report;
 
+use PHPUnit\Framework\TestCase;
 use TreeHouse\BuckarooBundle\Report\ReportInterface;
 use TreeHouse\BuckarooBundle\Report\SimpleSepaDirectDebitTransactionCreditReport;
 use TreeHouse\BuckarooBundle\Response\ResponseInterface;
 
-class SimpleSepaDirectDebitTransactionCreditReportTest extends \PHPUnit_Framework_TestCase
+class SimpleSepaDirectDebitTransactionCreditReportTest extends TestCase
 {
     private $amount = 12.34;
     private $currency = 'EUR';

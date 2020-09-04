@@ -2,9 +2,10 @@
 
 namespace TreeHouse\BuckarooBundle\Tests\Request;
 
+use PHPUnit\Framework\TestCase;
 use TreeHouse\BuckarooBundle\Request\IdealTransactionSpecificationRequest;
 
-class IdealTransactionSpecificationRequestTest extends \PHPUnit_Framework_TestCase
+class IdealTransactionSpecificationRequestTest extends TestCase
 {
     /**
      * @test

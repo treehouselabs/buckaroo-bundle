@@ -2,12 +2,12 @@
 
 namespace TreeHouse\BuckarooBundle\Tests\Report;
 
-use TreeHouse\BuckarooBundle\Report\IdealTransactionReport;
+use PHPUnit\Framework\TestCase;
 use TreeHouse\BuckarooBundle\Report\ReportInterface;
 use TreeHouse\BuckarooBundle\Report\TransferTransactionReport;
 use TreeHouse\BuckarooBundle\Response\ResponseInterface;
 
-class TransferTransactionReportTest extends \PHPUnit_Framework_TestCase
+class TransferTransactionReportTest extends TestCase
 {
     private $amount = 12.34;
     private $currency = 'EUR';

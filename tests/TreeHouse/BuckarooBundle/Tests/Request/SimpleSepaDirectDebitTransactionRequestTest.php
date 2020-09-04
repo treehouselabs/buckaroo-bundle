@@ -4,10 +4,11 @@ namespace TreeHouse\BuckarooBundle\Tests\Request;
 
 use Money\Currency;
 use Money\Money;
+use PHPUnit\Framework\TestCase;
 use TreeHouse\BuckarooBundle\Model\Mandate;
 use TreeHouse\BuckarooBundle\Request\SimpleSepaDirectDebitTransactionRequest;
 
-class SimpleSepaDirectDebitTransactionRequestTest extends \PHPUnit_Framework_TestCase
+class SimpleSepaDirectDebitTransactionRequestTest extends TestCase
 {
     /**
      * @test

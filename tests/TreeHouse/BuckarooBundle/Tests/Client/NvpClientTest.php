@@ -6,12 +6,13 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 use Mockery as Mock;
+use PHPUnit\Framework\TestCase;
 use TreeHouse\BuckarooBundle\Client\NvpClient;
 use TreeHouse\BuckarooBundle\Request\RequestInterface;
 use TreeHouse\BuckarooBundle\Response\ResponseInterface;
 use TreeHouse\BuckarooBundle\SignatureGenerator;
 
-class NvpClientTest extends \PHPUnit_Framework_TestCase
+class NvpClientTest extends TestCase
 {
     /**
      * @test
