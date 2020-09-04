@@ -133,7 +133,7 @@ class MockResponse implements ResponseInterface
     public static function create(array $data)
     {
         $response = new static();
-        $response->foobar = $data['foobar'];
+        $response->foobar = $data['foobar'] ?? null;
 
         return $response;
     }
