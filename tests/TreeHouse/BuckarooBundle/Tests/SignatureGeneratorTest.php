@@ -2,9 +2,10 @@
 
 namespace TreeHouse\BuckarooBundle\Tests;
 
+use PHPUnit\Framework\TestCase;
 use TreeHouse\BuckarooBundle\SignatureGenerator;
 
-class SignatureGeneratorTest extends \PHPUnit_Framework_TestCase
+class SignatureGeneratorTest extends TestCase
 {
     /**
      * @test

@@ -4,10 +4,11 @@ namespace TreeHouse\BuckarooBundle\Tests\Request;
 
 use Money\Currency;
 use Money\Money;
+use PHPUnit\Framework\TestCase;
 use TreeHouse\BuckarooBundle\Model\ReturnUrl;
 use TreeHouse\BuckarooBundle\Request\IdealTransactionRequest;
 
-class IdealTransactionRequestTest extends \PHPUnit_Framework_TestCase
+class IdealTransactionRequestTest extends TestCase
 {
     /**
      * @test

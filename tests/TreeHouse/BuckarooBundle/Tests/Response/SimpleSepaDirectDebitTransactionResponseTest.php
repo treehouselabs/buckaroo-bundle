@@ -1,12 +1,13 @@
 <?php
 
-namespace TreeHouse\BuckarooBundle\Tests\Report;
+namespace TreeHouse\BuckarooBundle\Tests\Response;
 
+use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use TreeHouse\BuckarooBundle\Response\ResponseInterface;
 use TreeHouse\BuckarooBundle\Response\SimpleSepaDirectDebitTransactionResponse;
 
-class SimpleSepaDirectDebitTransactionResponseTest extends \PHPUnit_Framework_TestCase
+class SimpleSepaDirectDebitTransactionResponseTest extends TestCase
 {
     private $responseData = [
         'BRQ_APIRESULT' => ResponseInterface::RESULT_SUCCESS,

@@ -105,7 +105,7 @@ class SimpleSepaDirectDebitTransactionRequest extends AbstractTransactionRequest
     /**
      * @inheritdoc
      */
-    public static function getResponseClass()
+    public function getResponseClass()
     {
         return SimpleSepaDirectDebitTransactionResponse::class;
     }

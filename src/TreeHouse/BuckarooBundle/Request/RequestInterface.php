@@ -7,7 +7,7 @@ interface RequestInterface
     /**
      * @return string
      */
-    public static function getResponseClass();
+    public function getResponseClass();
 
     /**
      * @return array

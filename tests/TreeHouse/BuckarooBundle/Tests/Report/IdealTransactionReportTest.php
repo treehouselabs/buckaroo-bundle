@@ -2,11 +2,12 @@
 
 namespace TreeHouse\BuckarooBundle\Tests\Report;
 
+use PHPUnit\Framework\TestCase;
 use TreeHouse\BuckarooBundle\Report\IdealTransactionReport;
 use TreeHouse\BuckarooBundle\Report\ReportInterface;
 use TreeHouse\BuckarooBundle\Response\ResponseInterface;
 
-class IdealTransactionReportTest extends \PHPUnit_Framework_TestCase
+class IdealTransactionReportTest extends TestCase
 {
     private $amount = 12.34;
     private $currency = 'EUR';

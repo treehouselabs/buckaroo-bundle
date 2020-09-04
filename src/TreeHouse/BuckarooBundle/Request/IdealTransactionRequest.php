@@ -72,7 +72,7 @@ class IdealTransactionRequest extends AbstractTransactionRequest
     /**
      * @inheritdoc
      */
-    public static function getResponseClass()
+    public function getResponseClass()
     {
         return IdealTransactionResponse::class;
     }

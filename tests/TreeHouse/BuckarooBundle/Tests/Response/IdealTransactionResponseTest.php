@@ -2,10 +2,11 @@
 
 namespace TreeHouse\BuckarooBundle\Tests\Response;
 
+use PHPUnit\Framework\TestCase;
 use TreeHouse\BuckarooBundle\Response\IdealTransactionResponse;
 use TreeHouse\BuckarooBundle\Response\ResponseInterface;
 
-class IdealTransactionResponseTest extends \PHPUnit_Framework_TestCase
+class IdealTransactionResponseTest extends TestCase
 {
     /**
      * @test

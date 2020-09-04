@@ -20,7 +20,7 @@ class IdealTransactionSpecificationRequest implements RequestInterface, BadSigna
     /**
      * @inheritdoc
      */
-    public static function getResponseClass()
+    public function getResponseClass()
     {
         return IdealTransactionSpecificationResponse::class;
     }
