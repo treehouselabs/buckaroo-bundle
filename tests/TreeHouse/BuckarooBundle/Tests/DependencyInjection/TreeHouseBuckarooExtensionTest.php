@@ -3,6 +3,7 @@
 namespace TreeHouse\BuckarooBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use TreeHouse\BuckarooBundle\Client\NvpClient;
 use TreeHouse\BuckarooBundle\DependencyInjection\TreeHouseBuckarooExtension;
 use TreeHouse\BuckarooBundle\SignatureGenerator;
@@ -53,12 +54,13 @@ class TreeHouseBuckarooExtensionTest extends AbstractExtensionTestCase
     /**
      * @test
      * @dataProvider getIncompleteConfigurations
-     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
      *
      * @param array $config
      */
     public function it_fails_without_certain_elements(array $config)
     {
+        $this->expectException(InvalidConfigurationException::class);
+
         $this->load($config);
     }
 
@@ -92,7 +94,7 @@ class TreeHouseBuckarooExtensionTest extends AbstractExtensionTestCase
     /**
      * @inheritdoc
      */
-    protected function getContainerExtensions()
+    protected function getContainerExtensions(): array
     {
         return [new TreeHouseBuckarooExtension()];
     }

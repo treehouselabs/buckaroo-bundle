@@ -12,10 +12,9 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('tree_house_buckaroo');
+        $treeBuilder = new TreeBuilder('tree_house_buckaroo');
 
-        $config = $rootNode->children();
+        $config = $treeBuilder->getRootNode()->children();
         $config
             ->booleanNode('test_mode')
             ->info('Whether to enable test mode')

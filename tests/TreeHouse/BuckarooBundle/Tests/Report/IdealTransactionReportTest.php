@@ -245,7 +245,6 @@ class IdealTransactionReportTest extends TestCase
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
      */
     public function it_fails_when_data_is_missing()
     {
@@ -258,6 +257,8 @@ class IdealTransactionReportTest extends TestCase
             'BRQ_PAYMENT_METHOD' => $this->paymentMethod,
             'BRQ_SERVICE_IDEAL_CONSUMERISSUER' => $this->consumerIssuer,
         ];
+
+        $this->expectException(\InvalidArgumentException::class);
 
         IdealTransactionReport::create($data);
     }

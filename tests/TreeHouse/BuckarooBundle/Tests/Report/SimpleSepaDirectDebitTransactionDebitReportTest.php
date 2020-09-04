@@ -72,7 +72,7 @@ class SimpleSepaDirectDebitTransactionDebitReportTest extends TestCase
 
     /**
      * @test
-     * @expectedException \RuntimeException
+     *
      */
     public function it_fails_when_creating_a_credit_report()
     {
@@ -98,12 +98,13 @@ class SimpleSepaDirectDebitTransactionDebitReportTest extends TestCase
             'BRQ_TRANSACTIONS' => $this->transactions,
         ];
 
+        $this->expectException(\RuntimeException::class);
+
         SimpleSepaDirectDebitTransactionDebitReport::create($data);
     }
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
      */
     public function it_fails_when_data_is_missing()
     {
@@ -120,6 +121,8 @@ class SimpleSepaDirectDebitTransactionDebitReportTest extends TestCase
             'BRQ_TRANSACTION_TYPE' => $this->transactionType,
             'BRQ_TRANSACTIONS' => $this->transactions,
         ];
+
+        $this->expectException(\InvalidArgumentException::class);
 
         SimpleSepaDirectDebitTransactionDebitReport::create($data);
     }
