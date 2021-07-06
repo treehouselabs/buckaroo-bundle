@@ -47,7 +47,7 @@ class SimpleSepaDirectDebitTransactionCreditReport extends AbstractSimpleSepaDir
         static::checkRequiredFields($requiredFields, $data);
         static::ensureOptionalFields($optionalFields, $data);
 
-        if ('C008' === $data['BRQ_TRANSACTION_TYPE']) {
+        if ('C008' === $data['BRQ_TRANSACTION_TYPE'] || 'C004' === $data['BRQ_TRANSACTION_TYPE']) {
             throw new \RuntimeException(
                 sprintf(
                     'Expected to create a %s for a credit transaction. Got a regular transaction (type C008) instead. ' .

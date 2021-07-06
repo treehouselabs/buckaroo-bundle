@@ -33,7 +33,7 @@ class SimpleSepaDirectDebitTransactionDebitReport extends AbstractSimpleSepaDire
             'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_MANDATEREFERENCE',
         ], $data);
 
-        if ('C008' !== $data['BRQ_TRANSACTION_TYPE']) {
+        if ('C008' !== $data['BRQ_TRANSACTION_TYPE'] && 'C004' !== $data['BRQ_TRANSACTION_TYPE']) {
             throw new \RuntimeException(
                 sprintf(
                     'Expected to create a %s for a debit transaction. Got a credit transaction (type %s) instead. ' .
