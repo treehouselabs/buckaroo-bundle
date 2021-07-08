@@ -64,6 +64,37 @@ class SimpleSepaDirectDebitTransactionCreditReportTest extends TestCase
 
     /**
      * @test
+     */
+    public function it_overrules_simple_direct_debit()
+    {
+        $statuscode = ResponseInterface::STATUS_SUCCESS;
+        $statusMessage = 'Transaction successfully processed';
+
+        $data = [
+            'BRQ_AMOUNT_CREDIT' => $this->amount,
+            'BRQ_CURRENCY' => $this->currency,
+            'BRQ_CUSTOMER_NAME' => $this->customerName,
+            'BRQ_INVOICENUMBER' => $this->invoiceNumber,
+            'BRQ_PAYMENT' => $this->payment,
+            'BRQ_TRANSACTION_TYPE' => $this->transactionType,
+            'BRQ_STATUSCODE' => $statuscode,
+            'BRQ_STATUSMESSAGE' => $statusMessage,
+            'BRQ_TIMESTAMP' => $this->timestamp,
+            'BRQ_TRANSACTIONS' => $this->transactions,
+            'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_REASONCODE' => 'wrong code',
+            'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_REASONEXPLANATION' => 'wrong reason',
+            'BRQ_SERVICE_SEPADIRECTDEBIT_REASONCODE' => $this->reasonCode,
+            'BRQ_SERVICE_SEPADIRECTDEBIT_REASONEXPLANATION' => $this->reasonExplanation,
+        ];
+
+        $report = SimpleSepaDirectDebitTransactionCreditReport::create($data);
+
+        $this->assertSame($this->reasonCode, $report->getReasonCode());
+        $this->assertSame($this->reasonExplanation, $report->getReasonExplanation());
+    }
+
+    /**
+     * @test
      *
      */
     public function it_fails_when_creating_a_debit_report()
