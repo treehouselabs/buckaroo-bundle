@@ -42,6 +42,8 @@ class SimpleSepaDirectDebitTransactionCreditReport extends AbstractSimpleSepaDir
         $optionalFields = [
             'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_REASONCODE',
             'BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_REASONEXPLANATION',
+            'BRQ_SERVICE_SEPADIRECTDEBIT_REASONCODE',
+            'BRQ_SERVICE_SEPADIRECTDEBIT_REASONEXPLANATION',
         ];
 
         static::checkRequiredFields($requiredFields, $data);
@@ -66,8 +68,16 @@ class SimpleSepaDirectDebitTransactionCreditReport extends AbstractSimpleSepaDir
         $report->transactionMethod = isset($data['BRQ_TRANSACTION_METHOD']) ? $data['BRQ_TRANSACTION_METHOD'] : null;
         $report->transactionType = $data['BRQ_TRANSACTION_TYPE'];
         $report->transactions = $data['BRQ_TRANSACTIONS'];
-        $report->reasonCode = $data['BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_REASONCODE'];
-        $report->reasonExplanation = $data['BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_REASONEXPLANATION'];
+
+        if ($data['BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_REASONCODE'] !== null) {
+            $report->reasonCode = $data['BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_REASONCODE'];
+            $report->reasonExplanation = $data['BRQ_SERVICE_SIMPLESEPADIRECTDEBIT_REASONEXPLANATION'];
+        }
+
+        if ($data['BRQ_SERVICE_SEPADIRECTDEBIT_REASONCODE'] !== null) {
+            $report->reasonCode = $data['BRQ_SERVICE_SEPADIRECTDEBIT_REASONCODE'];
+            $report->reasonExplanation = $data['BRQ_SERVICE_SEPADIRECTDEBIT_REASONEXPLANATION'];
+        }
 
         return $report;
     }
