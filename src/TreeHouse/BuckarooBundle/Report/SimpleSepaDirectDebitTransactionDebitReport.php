@@ -20,7 +20,6 @@ class SimpleSepaDirectDebitTransactionDebitReport extends AbstractSimpleSepaDire
             'BRQ_CUSTOMER_NAME',
             'BRQ_INVOICENUMBER',
             'BRQ_PAYMENT',
-            'BRQ_STARTRECURRENT',
             'BRQ_TRANSACTION_TYPE',
         ];
 
